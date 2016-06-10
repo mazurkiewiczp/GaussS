@@ -2,6 +2,7 @@ import scala.io.Source
 import java.io.FileNotFoundException
 import java.io.IOException
 import java.lang.ArrayIndexOutOfBoundsException
+import java.lang.NumberFormatException
 import util.Random
 import math.abs
 
@@ -93,4 +94,5 @@ try {
   case ex: FileNotFoundException => println("Couldn't find that file.")
   case ex: IOException => println("Had an IOException trying to read that file.")
   case ex: ArrayIndexOutOfBoundsException => println("Data should have N rows and N+1 columns.")
+  case ex :NumberFormatException => println("Values should be tab-separated.")
 }

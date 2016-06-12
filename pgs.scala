@@ -8,8 +8,10 @@ import java.lang.NumberFormatException
 import util.Random
 import math.abs
 
-
-
+def printVector(X:Array[Double]) = {
+	for (i <- 0 until X.length)
+		println("X_" + (i+1) + " = " + X(i))	
+}
 
 class met{
 def gaussElimination(A:Array[Array[Double]],Y:Array[Double]):Array[Double] = {
@@ -34,7 +36,7 @@ def gaussElimination(A:Array[Array[Double]],Y:Array[Double]):Array[Double] = {
 }
 
 object parallelGaussElem{
-def main(args : Array[String]) :Unit = {
+def main() = {
 	var ps = new met()
 	spg(args(0).toInt)
 	var mm  = Array.ofDim[Double](args(1).toInt , args(1).toInt )
@@ -48,7 +50,7 @@ def main(args : Array[String]) :Unit = {
 
 	var res = ps.gaussElimination(mm,mv)
 
-	println(res)	
+	printVector(res)	
 	}
 
 def spg(numThreads: Int): Unit = {
@@ -65,3 +67,5 @@ defaultTaskSupportField.set(
 			)
 }
 }
+
+parallelGaussElem.main()

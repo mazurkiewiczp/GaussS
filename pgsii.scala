@@ -65,6 +65,15 @@ def printVector(X:Array[Double]) = {
 		println("X_" + (i+1) + " = " + X(i))	
 }
 
+def printMatrix(X:Array[Array[Double]]) = {
+	for (i <- 0 until X(0).length){
+		for (j <- 0 until X.length)
+			print(X(i)(j) + "\t")
+		print("\n")
+	}
+}
+
+
 object parallelGauss{
 def main() = {
 
@@ -73,7 +82,7 @@ def main() = {
 	System.exit(0)
 	}
 
-	
+	try {
 	var mm  = Array.ofDim[Double](args(1).toInt , args(1).toInt )
 	var mv  = Array.ofDim[Double](args(1).toInt)
 	var rn = new scala.util.Random
@@ -82,11 +91,6 @@ def main() = {
 		mm(i)(j) =  rn.nextInt(100)
 		mv(i) =rn.nextInt(100)
 	}
-	
-
-	try {
-	def time = System.currentTimeMillis
-	var t = time
 	var ps = new met()
 	spg(args(1).toInt)
 /*
@@ -102,12 +106,13 @@ def main() = {
 	if (args.length < 3 || (args.length>1 && args(2) != "gs")){
 		println("Gaussian Elimination (default)")
 		val ans = ps.gaussElimination(mm,mv)
-		println(time-t)
+		printMatrix(mm)
 		printVector(ans)
 	}
 	else {
 		println("Gauss-Seidel method")
 		val ans = ps.gaussSeidel(mm,mv)
+		printMatrix(mm)
 		printVector(ans)
 	}
 	

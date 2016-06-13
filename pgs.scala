@@ -7,7 +7,6 @@ import java.lang.NumberFormatException
 import util.Random
 import math.abs
 
-
 class met{
 def gaussElimination(A:Array[Array[Double]],Y:Array[Double]):Array[Double] = {
 	for(i <- 0 until A.length){
@@ -68,9 +67,7 @@ def printVector(X:Array[Double]) = {
 
 object parallelGauss{
 def main() = {
-	var ps = new met()
-	spg(args(1).toInt)
-	
+
 	if (args.length == 0){
 	println("No arguments provided. Need file path.")
 	System.exit(0)
@@ -88,6 +85,8 @@ def main() = {
 	*/
 
 	try {
+	var ps = new met()
+	spg(args(1).toInt)
 	var data = Source.fromFile(args(0)).getLines().map(_.split("\t")).toList
 	var A = Array.ofDim[Double](data.length,data(0).length-1)
 	var Y = new Array[Double](data.length)
@@ -111,7 +110,7 @@ def main() = {
 	} catch {
   	case ex: FileNotFoundException => println("Couldn't find that file.")
   	case ex: IOException => println("Had an IOException trying to read that file.")
-  	case ex: ArrayIndexOutOfBoundsException => println("Data should have N rows and N+1 columns.")
+  	case ex: ArrayIndexOutOfBoundsException => println("Data should have N rows and N+1 columns. 2nd arg should be int (number of threads).")
   	case ex: NumberFormatException => println("Values should be tab-separated.")
 	}	
 }

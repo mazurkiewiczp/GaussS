@@ -38,7 +38,8 @@ def gaussElimination(A:Array[Array[Double]],Y:Array[Double]):Array[Double] = {
 object parallelGaussElem{
 def main() = {
 	var ps = new met()
-	spg(args(0).toInt)
+	spg(args(1).toInt)
+/*
 	var mm  = Array.ofDim[Double](args(1).toInt , args(1).toInt )
 	var mv  = Array.ofDim[Double](args(1).toInt)
 	var rn = new scala.util.Random
@@ -47,9 +48,17 @@ def main() = {
 		mm(i)(j) =  rn.nextInt(100)
 		mv(i) =rn.nextInt(100)
 	}
+*/
+	var data = Source.fromFile(args(0)).getLines().map(_.split("\t")).toList
+	var A = Array.ofDim[Double](data.length,data(0).length-1)
+	var Y = new Array[Double](data.length)
+	for (i <- 0 until data.length){
+		for (j <- 0 until data(0).length-1)
+		A(i)(j)=data(i)(j).toDouble
+	Y(i)=data(i)(data(0).length-1).toDouble
+	}
 
-	var res = ps.gaussElimination(mm,mv)
-
+	var res = ps.gaussElimination(A,Y)
 	printVector(res)	
 	}
 

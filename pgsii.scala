@@ -65,11 +65,11 @@ def printVector(X:Array[Double]) = {
 		println("X_" + (i+1) + " = " + X(i))	
 }
 
-def printMatrix(X:Array[Array[Double]]) = {
+def printMatrix(X:Array[Array[Double]],Y:Array[Double]) = {
 	for (i <- 0 until X(0).length){
 		for (j <- 0 until X.length)
 			print(X(i)(j) + "\t")
-		print("\n")
+		print(Y(i) + "\n")
 	}
 }
 
@@ -106,13 +106,13 @@ def main() = {
 	if (args.length < 3 || (args.length>1 && args(2) != "gs")){
 		println("Gaussian Elimination (default)")
 		val ans = ps.gaussElimination(mm,mv)
-		printMatrix(mm)
+		printMatrix(mm,mv)
 		printVector(ans)
 	}
 	else {
 		println("Gauss-Seidel method")
 		val ans = ps.gaussSeidel(mm,mv)
-		printMatrix(mm)
+		printMatrix(mm,mv)
 		printVector(ans)
 	}
 	
